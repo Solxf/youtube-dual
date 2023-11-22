@@ -1,7 +1,7 @@
 # 快手平台地址
 PLATFORM_KS = "https://cp.kuaishou.com/article/publish/video"
 
-# 抖音平台上传地址
+# 抖音平台上传地址1
 PLATFORM_DY = None
 
 # 西瓜平台上传地址
