@@ -78,12 +78,24 @@ def trans16_9_to_9_16(input_file, output_file):
     return res
 
 
-def sharpen_contrast_zoom(input_file, output_file):
+def sharpen_contrast_zoom_of_short(input_file, output_file):
     """
-    ffmpeg: 同时处理锐化、对比度和亮度、缩放和裁剪
+    ffmpeg: 同时处理锐化、对比度和亮度、缩放和裁剪(针对short视频：1080:1920)
     因直接传递字符串cmd命令会报错，所以传递拆分后的命令列表进行处理
     """
     filter_complex = "unsharp=5:5:2, eq=contrast=1.2:brightness=0.1, scale=1180:-1, crop=1080:1920:30:10"
+    cmd_list = ["ffmpeg", "-i", input_file, "-filter_complex", filter_complex, "-c:v", "libx264", "-c:a", "copy", "-f", "mp4", output_file, "-y"]
+    print(' '.join(cmd_list))
+    res = execute_command(cmd_list)
+    return res
+
+
+def sharpen_contrast_zoom_of_video(input_file, output_file):
+    """
+    ffmpeg: 同时处理锐化、对比度和亮度、缩放和裁剪(针对video视频：1920:1080)
+    因直接传递字符串cmd命令会报错，所以传递拆分后的命令列表进行处理
+    """
+    filter_complex = "unsharp=5:5:2, eq=contrast=1.2:brightness=0.1, scale=2020:-1, crop=1920:1080:30:10"
     cmd_list = ["ffmpeg", "-i", input_file, "-filter_complex", filter_complex, "-c:v", "libx264", "-c:a", "copy", "-f", "mp4", output_file, "-y"]
     print(' '.join(cmd_list))
     res = execute_command(cmd_list)

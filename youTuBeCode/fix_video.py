@@ -11,7 +11,7 @@ class FixVideo:
     TODO: 其他需要对原视频进行处理的操作，例如视频中的字幕翻译，将视频转为16:9的分辨率等。
     """
 
-    def __init__(self, input_webm_file, input_mp4_file, input_json_file, model="medium", language='zh', font_size=30, font_file='./HYBiRanTianTianQuanW-2.ttf'):
+    def __init__(self, input_webm_file, input_mp4_file, input_json_file, model="medium", language='zh', font_size=50, font_file='./HYBiRanTianTianQuanW-2.ttf'):
         """
         :param input_webm_file: 下载的视频文件
         :param input_mp4_file:  下载的音频文件
@@ -55,11 +55,18 @@ class FixVideo:
         print("2.开始对合并后的文件进行综合滤镜处理...")
         filter_file = os.path.join(self.fix_path, basename.replace(".mp4", "_filter.mp4"))
         width, height = ut.get_video_resolution(combine_file)
+        # 平台支持16:9的视频，故暂时无需进行转换
+        # if width > 1080:
+        #     # 将1920:1080 转为1080:1920
+        #     ff.trans16_9_to_9_16(combine_file, filter_file)
+        # else:
+        #     ff.sharpen_contrast_zoom_of_video(combine_file, filter_file)
         if width > 1080:
-            # 将1920:1080 转为1080:1920
-            ff.trans16_9_to_9_16(combine_file, filter_file)
+            # video视频
+            ff.sharpen_contrast_zoom_of_video(combine_file, filter_file)
         else:
-            ff.sharpen_contrast_zoom(combine_file, filter_file)
+            # short视频
+            ff.sharpen_contrast_zoom_of_short(combine_file, filter_file)
         print("3.开始根据综合滤镜处理后的文件制作封面文件...")
         cover_file = os.path.join(self.fix_path, basename.replace(".mp4", "_cover.jpeg"))
         ff.get_cover(filter_file, cover_file)
