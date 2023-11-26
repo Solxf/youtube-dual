@@ -126,14 +126,12 @@ class UpLoadVideoToKs:
 
 if __name__ == '__main__':
     url_path = cf.PLATFORM_KS
-    video = r'D:\youtube_output\1699756266279_output.mp4'
-    fm = r'D:\youtube_output\1699756266279_cover_with_title.jpeg'
-    title_name = '美食一份'
-    label_content = "#美食 #国外美食"
-    driver_p = r'E:\pycharm\python_workspace\youTuBeCraw\conf\chromedriver.exe'
+    video = r'D:\youtube_output\1700983912269_output.mp4'
+    fm = r'D:\youtube_output\1700983912269_cover_with_title.jpeg'
+    title_name = '音乐一份'
+    label_content = "#音乐 #国外音乐"
     uv_ks = UpLoadVideoToKs(video, fm, title_name, label_content)
 
     uv_ks.run(url_path)
-
 
 

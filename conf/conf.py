@@ -37,4 +37,4 @@ WAIT_TIME_UPLOAD_COVER = 10
 WAIT_TIME_CHANNEL_CHECK = 1
 
 # chrome浏览器驱动位置
-CHROME_DRIVER_PATH = r'E:\pycharm\python_workspace\youTuBeCraw\conf\chromedriver.exe'
+CHROME_DRIVER_PATH = r'E:\pycharm\python_workspace\youtobe-deal\conf\chromedriver.exe'
