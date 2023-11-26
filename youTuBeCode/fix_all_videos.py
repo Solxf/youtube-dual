@@ -13,8 +13,9 @@ valid_file_list = ut.get_valid_files(download_file_list)
 if valid_file_list:
     # 获取去重后的不带后缀的文件名
     file_list = sorted(set([os.path.basename(i).split(".")[0] for i in valid_file_list]))
-    print("本次待剪辑的文件列表为：{}".format(file_list))
-    for file in file_list:
+    print("本次待剪辑的文件列表为：{},总共有{}个文件！".format(file_list, len(file_list)))
+    for i, file in enumerate(file_list):
+        print("#" * 20 + "开始处理第{}个文件...".format(i + 1) + "#" * 20)
         # 找出当前文件命对应的3个文件（webm, mp4, json）
         current_file_list = [i for i in valid_file_list if file in i]
         webm_file = [i for i in current_file_list if i.endswith(".webm")][0]
