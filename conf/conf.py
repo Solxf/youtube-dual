@@ -1,11 +1,11 @@
-# 快手平台地址
+# 快手创作平台地址
 PLATFORM_KS = "https://cp.kuaishou.com/article/publish/video"
+
+# 西瓜创作平台地址
+PLATFORM_XG = "https://studio.ixigua.com/upload?from=post_article"
 
 # 抖音平台上传地址
 PLATFORM_DY = None
-
-# 西瓜平台上传地址
-PLATFORM_XG = None
 
 # 小红书平台上传地址
 PLATFORM_XHS = None
@@ -14,7 +14,7 @@ PLATFORM_XHS = None
 PLATFORM_PP = None
 
 # 目前支持的平台，后续如果有增加其他平台的功能，则在此处加入，即可上传到对应的平台
-SUPPORT_PLATFORM = ['KS', 'DY', 'XHS']
+SUPPORT_PLATFORM = ['KS', 'XG', 'DY', 'XHS']
 
 # 下载文件的根目录
 DOWNLOAD_PATH = 'D:\\youtube_download'
