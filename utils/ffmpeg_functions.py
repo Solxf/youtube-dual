@@ -89,7 +89,7 @@ def get_cover(input_file, cover_file):
     return res
 
 
-def combine_srt_and_video_nq(srt_file, video_file, output_file, font_name=None, font_size=12):
+def combine_srt_and_video_nq(srt_file, video_file, output_file, font_name=None, alignment=2, font_size=10):
     """
     ffmpeg: 使用内嵌字幕的方式合并字幕文件和video视频文件(-y参数告诉 ffmpeg在输出文件已经存在时覆盖它而不提示确认。)
     :param srt_file: 如果是windows系统，输入的路径必须是os.path.join()得到的路径。
@@ -99,6 +99,7 @@ def combine_srt_and_video_nq(srt_file, video_file, output_file, font_name=None, 
     :param video_file:
     :param output_file:
     :param font_name:
+    :param alignment:字幕位置：1：左下方，2：底部中心，3右下方，5：左上方，6：顶部中央，7：右上方，9：左中，10：中间中，11：右中
     :param font_size:
     TODO: 添加字幕的大小，位置，字体，颜色等功能 参考：https://magiclen.org/ffmpeg-subtitle/
     方式：内嵌字幕：硬字幕
@@ -110,7 +111,8 @@ def combine_srt_and_video_nq(srt_file, video_file, output_file, font_name=None, 
         video_file = video_file.replace("\\", "\\\\")
         output_file = output_file.replace("\\", "\\\\")
     # 要使用subprocess.run执行cmd命令，则必须写在一行，不能换行
-    command_str = """ffmpeg -i {} -vf "subtitles='{}':force_style='FontName={},FontSize={}'" {} -y""".format(video_file, srt_file, font_name, font_size, output_file)
+    # command_str = """ffmpeg -i {} -vf "subtitles='{}':force_style='FontName={},FontSize={}'" {} -y""".format(video_file, srt_file, font_name, font_size, output_file)
+    command_str = """ffmpeg -i {} -vf "subtitles='{}':force_style='FontName={},FontSize={},Alignment={}'" {} -y""".format(video_file, srt_file, font_name, font_size, alignment, output_file)
     print(command_str)
     res = execute_command(command_str)
     return res
