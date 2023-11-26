@@ -151,7 +151,7 @@ def text_border(draw, text, x, y, font, shadow_color, fillcolor):
 
 
 # 将title翻译为中文
-def translate_to_chinese(text, channel_name, from_lang, to_lang="zh"):
+def translate_to_chinese(text, channel_name, from_lang, to_lang="zh-cn"):
     try:
         translator = Translator(from_lang=from_lang, to_lang=to_lang)
         res = translator.translate(text)
@@ -215,18 +215,7 @@ def get_valid_files(file_list):
     return lst4
 
 
-# def get_file_info(file_name):
-#     """
-#
-#     :param file_name: 不带后缀的文件名，例如1699779970007
-#     :return: 返回视频的绝对路径， title的
-#     """
-#
-#     video_file = os.path.join(cf.OUTPUT_PATH, file_name + '_output.mp4')
-#     fm_file = os.path.join(cf.OUTPUT_PATH, file_name + '_cover_with_title.jpeg')
-#     json_file = os.path.join(cf.OUTPUT_PATH, file_name + '.json')
-#     print(video_file, fm_file, json_file)
-
-
 if __name__ == '__main__':
-    f = r'E:\pycharm\python_workspace\youTuBeCraw\conf\uploads_bak.json'
+    translator = Translator(from_lang="english", to_lang="zh-cn")
+    res = translator.translate("Lose You To Love Me")
+    print(res)

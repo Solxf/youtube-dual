@@ -13,7 +13,7 @@
         }
       ],
       "category":"音乐",
-      "language":"en"
+      "language":"english"
     },
     {
       "channel_url":"https://www.youtube.com/channel/UC-J-KZfRV8c13fOCkhXdLiQ",
@@ -28,7 +28,7 @@
         }
       ],
       "category":"音乐",
-      "language":"en"
+      "language":"english"
     },
     {
       "channel_url":"https://www.youtube.com/channel/UCy3zgWom-5AGypGX_FVTKpg",
@@ -43,7 +43,7 @@
         }
       ],
       "category":"音乐",
-      "language":"en"
+      "language":"english"
     },
     {
       "channel_url":"https://www.youtube.com/channel/UCqECaJ8Gagnn7YCbPEzWH6g",
@@ -58,7 +58,7 @@
         }
       ],
       "category":"音乐",
-      "language":"en"
+      "language":"english"
     },
     {
       "channel_url":"https://www.youtube.com/channel/UC7zjjW_bvcVsPcBiqUPJf1w",
@@ -73,13 +73,7 @@
         }
       ],
       "category":"音乐",
-      "language":"en"
+      "language":"english"
     }
   ]
 }
-
-
-
-
-
-

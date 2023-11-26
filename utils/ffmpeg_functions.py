@@ -67,6 +67,17 @@ def zoom_and_crop(input_file, output_file):
     return res
 
 
+def trans16_9_to_9_16(input_file, output_file):
+    """
+    将16:9的视频转为9:16（1920:1080 to 1080:1920）
+    """
+    vf = "scale=1080:ih*1080/iw,pad=iw:iw*16/9:(ow-iw)/2:(oh-ih)/2"
+    cmd_list = ["ffmpeg", "-i", input_file, "-vf", vf, output_file, "-y"]
+    print(' '.join(cmd_list))
+    res = execute_command(cmd_list)
+    return res
+
+
 def sharpen_contrast_zoom(input_file, output_file):
     """
     ffmpeg: 同时处理锐化、对比度和亮度、缩放和裁剪
@@ -86,9 +97,11 @@ def get_cover(input_file, cover_file):
     如果不主动提供，系统往往会默认使用第一帧或自动随机选一帧，这样一般展示效果不佳。建议主动从视频里获取一帧图片，作为封面图.
     在Youtube里，可以使用pytube调用接口得到原视频作者提供的封面，但是经过我的测试，这些图片分辨率都很低，没有办法下载到原图。
     所以使用强大的ffmpeg，从视频里“抽帧”。抽帧的细节就不介绍了，总的来说使用I帧比较保险，在自动化脚本里，定义获取影片的第一个I帧作为封面图。
+    -ss 1 : 表示从第一秒开始
+    -vframes 1 : 表示抽取第一帧
     """
     vf = r"select=eq(pict_type\,I)"
-    cmd_list = ["ffmpeg", "-i", input_file, "-vf", vf, "-vframes", "1", "-vsync", "vfr", "-qscale:v", "2", "-f", "image2", cover_file, "-y"]
+    cmd_list = ["ffmpeg", "-i", input_file, "-vf", vf, "-ss", "1", "-vframes", "1", "-vsync", "vfr", "-qscale:v", "2", "-f", "image2", cover_file, "-y"]
     print(' '.join(cmd_list))
     res = execute_command(cmd_list)
     return res
