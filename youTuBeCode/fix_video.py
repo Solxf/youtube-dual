@@ -51,18 +51,18 @@ class FixVideo:
         basename = os.path.basename(self.input_mp4_file)
         print("1.开始合并视频文件与音频文件...")
         combine_file = os.path.join(self.fix_path, basename.replace(".mp4", "_combine.mp4"))
-        #ff.combine_webm_and_mp4(self.input_webm_file, self.input_mp4_file, combine_file)
+        ff.combine_webm_and_mp4(self.input_webm_file, self.input_mp4_file, combine_file)
         print("2.开始对合并后的文件进行综合滤镜处理...")
         filter_file = os.path.join(self.fix_path, basename.replace(".mp4", "_filter.mp4"))
         width, height = ut.get_video_resolution(combine_file)
-        # if width > 1080:
-        #     # 将1920:1080 转为1080:1920
-        #     ff.trans16_9_to_9_16(combine_file, filter_file)
-        # else:
-        #     ff.sharpen_contrast_zoom(combine_file, filter_file)
+        if width > 1080:
+            # 将1920:1080 转为1080:1920
+            ff.trans16_9_to_9_16(combine_file, filter_file)
+        else:
+            ff.sharpen_contrast_zoom(combine_file, filter_file)
         print("3.开始根据综合滤镜处理后的文件制作封面文件...")
         cover_file = os.path.join(self.fix_path, basename.replace(".mp4", "_cover.jpeg"))
-        #ff.get_cover(filter_file, cover_file)
+        ff.get_cover(filter_file, cover_file)
         print("4.开始根据原始音频文件提取字幕...")
         res = wf.get_srt_file(self.input_mp4_file, self.fix_path, model=self.model, language=self.language)
         return basename, filter_file, cover_file, res
