@@ -71,10 +71,10 @@ class DownLoadYouTuBeVideo:
 
 if __name__ == '__main__':
     # 将频道下的历史数据进行下载
-    channel_url = "https://www.youtube.com/channel/UCuOjFdUTw4wyWqMkUOHREzA"
+    channel_url = "https://www.youtube.com/channel/UCVKM8_Jz1JkhGQQQ1pwfSRg"
     channel = Channel(channel_url)
     video_urls = channel.video_urls
-    video_urls = video_urls[:24]
+    video_urls = video_urls[:5]
     print(video_urls)
     video_urls.reverse()
     print(video_urls)

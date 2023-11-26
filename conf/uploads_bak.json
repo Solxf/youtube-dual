@@ -1,21 +1,6 @@
 {
   "uploads":[
     {
-      "channel_url":"https://www.youtube.com/channel/UCEMoAW9Qk0HrZqLxV5BFhDw",
-      "channel_name":"国外音乐",
-      "videos":[
-        {
-          "id":"sXi9Vz-Kgg0",
-          "url":"https://www.youtube.com/watch?v=sXi9Vz-Kgg0",
-          "name":"Taylor Swift - New Romantics (Taylor's Version) | Karaoke / Instrumental",
-          "publish_date":"2023-10-29 00:00:00",
-          "published":[ ]
-        }
-      ],
-      "category":"音乐",
-      "language":"english"
-    },
-    {
       "channel_url":"https://www.youtube.com/channel/UCVKM8_Jz1JkhGQQQ1pwfSRg",
       "channel_name":"国外音乐",
       "videos":[

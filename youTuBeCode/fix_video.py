@@ -52,62 +52,61 @@ class FixVideo:
         print("1.开始合并视频文件与音频文件...")
         combine_file = os.path.join(self.fix_path, basename.replace(".mp4", "_combine.mp4"))
         ff.combine_webm_and_mp4(self.input_webm_file, self.input_mp4_file, combine_file)
-        # print("2.开始对合并后的文件进行综合滤镜处理...")
-        # filter_file = os.path.join(self.fix_path, basename.replace(".mp4", "_filter.mp4"))
-        # width, height = ut.get_video_resolution(combine_file)
-        # # 平台支持16:9的视频，故暂时无需进行转换
-        # # if width > 1080:
-        # #     # 将1920:1080 转为1080:1920
-        # #     ff.trans16_9_to_9_16(combine_file, filter_file)
-        # # else:
-        # #     ff.sharpen_contrast_zoom_of_video(combine_file, filter_file)
+        print("2.开始对合并后的文件进行综合滤镜处理...")
+        filter_file = os.path.join(self.fix_path, basename.replace(".mp4", "_filter.mp4"))
+        width, height = ut.get_video_resolution(combine_file)
+        # 平台支持16:9的视频，故暂时无需进行转换
         # if width > 1080:
-        #     # video视频
-        #     ff.sharpen_contrast_zoom_of_video(combine_file, filter_file)
+        #     # 将1920:1080 转为1080:1920
+        #     ff.trans16_9_to_9_16(combine_file, filter_file)
         # else:
-        #     # short视频
-        #     ff.sharpen_contrast_zoom_of_short(combine_file, filter_file)
-        # print("3.开始根据综合滤镜处理后的文件制作封面文件...")
-        # cover_file = os.path.join(self.fix_path, basename.replace(".mp4", "_cover.jpeg"))
-        # ff.get_cover(filter_file, cover_file)
-        # print("4.开始根据原始音频文件提取字幕...")
-        # res = wf.get_srt_file(self.input_mp4_file, self.fix_path, model=self.model, language=self.language)
-        # return basename, filter_file, cover_file, res
+        #     ff.sharpen_contrast_zoom_of_video(combine_file, filter_file)
+        if width > 1080:
+            # video视频
+            ff.sharpen_contrast_zoom_of_video(combine_file, filter_file)
+        else:
+            # short视频
+            ff.sharpen_contrast_zoom_of_short(combine_file, filter_file)
+        print("3.开始根据综合滤镜处理后的文件制作封面文件...")
+        cover_file = os.path.join(self.fix_path, basename.replace(".mp4", "_cover.jpeg"))
+        ff.get_cover(filter_file, cover_file)
+        print("4.开始根据原始音频文件提取字幕...")
+        res = wf.get_srt_file(self.input_mp4_file, self.fix_path, model=self.model, language=self.language)
+        return basename, filter_file, cover_file, res
 
     def output_video(self):
         """
         将最终的封面文件以及合并了字幕的视频文件写出到output目录供后面上传逻辑使用
         :return: True表示封面文件和添加了字幕的视频文件都成功写入到了output目录
         """
-        # flag = True
-        # basename, filter_file, cover_file, res = self.fix_video()
-        # print("5.开始给封面添加文字,结果写入到output目录...")
-        # output_cover_file = os.path.join(self.output_path, basename.replace(".mp4", "_cover_with_title.jpeg"))
-        # cover_text = self.get_cover_text()
-        # ut.cover_add_text(cover_file, output_cover_file, cover_text, font_path=self.font_file, font_size=self.font_size)
-        # # whisper执行结束后srt文件输出的默认路径在fix_path下且与视频文件同名
-        # srt_file = os.path.join(self.fix_path, basename.replace(".mp4", ".srt"))
-        # output_video_file = os.path.join(self.output_path, basename.replace(".mp4", "_output.mp4"))
-        # if res != 0 or not os.path.exists(srt_file):
-        #     print("res:", res)
-        #     print("exist:", os.path.exists(srt_file))
-        #     print("6.字幕文件生成失败，请检查字幕文件生成逻辑！")
-        #     return False
-        # else:
-        #     print("6.开始合并字幕文件到视频中,结果写入到output目录...")
-        #     try:
-        #         ff.combine_srt_and_video_nq(srt_file=srt_file, video_file=filter_file, output_file=output_video_file)
-        #     except Exception:
-        #         flag = False
-        #         print("---合并字幕文件和视频文件的过程失败！")
-        #         print("---请检查字幕文件{}是否存在！".format(srt_file))
-        #         print("---请检查视频文件{}是否存在！".format(filter_file))
-        #     print("7.移动对应的json文件到output目录...")
-        #     source_file_name = self.input_webm_file.replace('.webm', '.json')
-        #     tag_file_name = os.path.join(cf.OUTPUT_PATH, os.path.basename(source_file_name))
-        #     ut.move(source_file_name, tag_file_name)
-        # return flag
-        self.fix_video()
+        flag = True
+        basename, filter_file, cover_file, res = self.fix_video()
+        print("5.开始给封面添加文字,结果写入到output目录...")
+        output_cover_file = os.path.join(self.output_path, basename.replace(".mp4", "_cover_with_title.jpeg"))
+        cover_text = self.get_cover_text()
+        ut.cover_add_text(cover_file, output_cover_file, cover_text, font_path=self.font_file, font_size=self.font_size)
+        # whisper执行结束后srt文件输出的默认路径在fix_path下且与视频文件同名
+        srt_file = os.path.join(self.fix_path, basename.replace(".mp4", ".srt"))
+        output_video_file = os.path.join(self.output_path, basename.replace(".mp4", "_output.mp4"))
+        if res != 0 or not os.path.exists(srt_file):
+            print("res:", res)
+            print("exist:", os.path.exists(srt_file))
+            print("6.字幕文件生成失败，请检查字幕文件生成逻辑！")
+            return False
+        else:
+            print("6.开始合并字幕文件到视频中,结果写入到output目录...")
+            try:
+                ff.combine_srt_and_video_nq(srt_file=srt_file, video_file=filter_file, output_file=output_video_file)
+            except Exception:
+                flag = False
+                print("---合并字幕文件和视频文件的过程失败！")
+                print("---请检查字幕文件{}是否存在！".format(srt_file))
+                print("---请检查视频文件{}是否存在！".format(filter_file))
+            print("7.移动对应的json文件到output目录...")
+            source_file_name = self.input_webm_file.replace('.webm', '.json')
+            tag_file_name = os.path.join(cf.OUTPUT_PATH, os.path.basename(source_file_name))
+            ut.move(source_file_name, tag_file_name)
+        return flag
 
 
 if __name__ == '__main__':
