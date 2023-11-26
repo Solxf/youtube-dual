@@ -74,7 +74,7 @@ if __name__ == '__main__':
     channel_url = "https://www.youtube.com/channel/UCVKM8_Jz1JkhGQQQ1pwfSRg"
     channel = Channel(channel_url)
     video_urls = channel.video_urls
-    video_urls = video_urls[:5]
+    video_urls = video_urls[5:10]
     print(video_urls)
     video_urls.reverse()
     print(video_urls)

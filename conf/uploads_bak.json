@@ -1,7 +1,7 @@
 {
   "uploads":[
     {
-      "channel_url":"https://www.youtube.com/channel/UCVKM8_Jz1JkhGQQQ1pwfSRg",
+      "channel_url":"https://www.youtube.com/channel/UCoqQSPIszs6_uS8X0Cx4rJg",
       "channel_name":"国外音乐",
       "videos":[
         {
@@ -16,8 +16,8 @@
       "language":"english"
     },
     {
-      "channel_url":"https://www.youtube.com/channel/UCQUsUoxjKwuVI3txJnYK2rA",
-      "channel_name":"国外音乐",
+      "channel_url":"https://www.youtube.com/channel/UC4mtWnxLPZ7x0fIEiI-n4Jw\"",
+      "channel_name":"国外舞蹈",
       "videos":[
         {
           "id":"GlM6lcFbLSg",
@@ -27,7 +27,37 @@
           "published":[ ]
         }
       ],
-      "category":"音乐",
+      "category":"舞蹈",
+      "language":"english"
+    },
+    {
+      "channel_url":"https://www.youtube.com/channel/UCGmebfBoPMuW_eaEzWlSaUQ",
+      "channel_name":"国外舞蹈",
+      "videos":[
+        {
+          "id":"GlM6lcFbLSg",
+          "url":"https://www.youtube.com/watch?v=GlM6lcFbLSg",
+          "name":"Can’t Catch Me Now",
+          "publish_date":"2023-11-13 00:00:00",
+          "published":[ ]
+        }
+      ],
+      "category":"舞蹈",
+      "language":"english"
+    },
+    {
+      "channel_url":"https://www.youtube.com/channel/UCqwUnggBBct-AY2lAdI88jQ",
+      "channel_name":"国外舞蹈",
+      "videos":[
+        {
+          "id":"GlM6lcFbLSg",
+          "url":"https://www.youtube.com/watch?v=GlM6lcFbLSg",
+          "name":"Can’t Catch Me Now",
+          "publish_date":"2023-11-13 00:00:00",
+          "published":[ ]
+        }
+      ],
+      "category":"舞蹈",
       "language":"english"
     }
   ]
