@@ -1,6 +1,6 @@
 import pytube
 import os
-
+from pytube import Channel
 from pytube.exceptions import VideoUnavailable
 
 from utils import utils as ut
@@ -48,6 +48,8 @@ class DownLoadYouTuBeVideo:
             video = pytube.YouTube(self.video_url, on_complete_callback=self.download_complete_handler)
             self.title = video.title
             self.author = video.author
+            print("title:", self.title)
+            print("author:", self.author)
             stream_highest_res = video.streams[0]
             for every_stream in video.streams.filter(type="video"):
                 if int(every_stream.resolution[:-1]) > 1080:
@@ -55,24 +57,45 @@ class DownLoadYouTuBeVideo:
                 if int(every_stream.resolution[:-1]) > current_res:
                     current_res = int(every_stream.resolution[:-1])
                     stream_highest_res = every_stream
+            print("current resolution:", current_res)
             # 下载视频文件
+            print("---开始下载视频文件...")
             stream_highest_res.download(filename=self.webm_file)
+            print("---开始下载音频文件...")
             # 下载音频文件
             stream_audio = video.streams.filter(type="audio", abr="128kbps")[0]
             stream_audio.download(filename=self.mp4_file)
-        except VideoUnavailable:
-            print("当前视频有限制，无法下载，已跳过！视频地址：{}".format(self.video_url))
+        except Exception:
+            print("当前视频无法下载，已跳过！视频地址：{}".format(self.video_url))
 
 
 if __name__ == '__main__':
-    vid_url = "https://www.youtube.com/watch?v=I3jZ2YVJ_xM"
-    y = DownLoadYouTuBeVideo(vid_url)
-    print(y.title)
-    print(y.author)
-    # 下载视频文件和音频文件
-    y.download_highest_resolution()
-    res = y.done_flag
-    if res == 2:
-        print("下载视频文件和音频文件成功！")
-        print("视频文件为：{}".format(y.webm_file))
-        print("音频文件为：{}".format(y.mp4_file))
+    # 将频道下的历史数据进行下载
+    channel_url = "https://www.youtube.com/channel/UCPNxhDvTcytIdvwXWAm43cA"
+    channel = Channel(channel_url)
+    video_urls = channel.video_urls
+    video_urls = video_urls[:53]
+    print(video_urls)
+    video_urls.reverse()
+    print(video_urls)
+    for video_url in video_urls:
+        y = DownLoadYouTuBeVideo(video_url)
+        # 下载视频文件和音频文件
+        y.download_highest_resolution()
+        res = y.done_flag
+        if res == 2:
+            print("下载视频文件和音频文件成功！")
+            print("视频文件为：{}".format(y.webm_file))
+            print("音频文件为：{}".format(y.mp4_file))
+            title = y.title
+            author = y.author
+            video_json_file = y.webm_file.replace(".webm", ".json")
+            channel_name = "国外音乐"
+            channel_category = "音乐"
+            channel_language = 'en'
+            new_video_id = video_url[-11:]
+            new_video_url = video_url
+            ut.write_video_info_to_json(title, author, video_json_file,
+                                        channel_url, channel_name, channel_category, channel_language,
+                                        new_video_id, new_video_url)
+            print("json文件为：{}".format(y.mp4_file))
