@@ -13,6 +13,7 @@ def combine_webm_and_mp4(webm_file, mp4_file, output_file):
     :return: 返回command命令执行后的结果，0表示成功，其余表示失败
     """
     cmd_list = ["ffmpeg", "-y", "-i", webm_file, "-i", mp4_file, "-shortest", output_file]
+    print(' '.join(cmd_list))
     return_code = execute_command(cmd_list)
     return return_code
 
@@ -27,6 +28,7 @@ def sharpen(input_file, output_file):
     """
     filter_complex = "unsharp=5:5:2"
     cmd_list = ["ffmpeg", "-i", input_file, "-filter_complex", filter_complex, "-c:v", "libx264", "-c:a", "copy", "-f", "mp4", output_file, "-y"]
+    print(' '.join(cmd_list))
     res = execute_command(cmd_list)
     return res
 
@@ -40,6 +42,7 @@ def contrast_and_brightness(input_file, output_file):
     """
     filter_complex = "eq=contrast=1.2:brightness=0.1"
     cmd_list = ["ffmpeg", "-i", input_file, "-filter_complex", filter_complex, "-c:v", "libx264", "-c:a", "copy", "-f", "mp4", output_file, "-y"]
+    print(' '.join(cmd_list))
     res = execute_command(cmd_list)
     return res
 
@@ -59,6 +62,7 @@ def zoom_and_crop(input_file, output_file):
     """
     filter_complex = "scale=1180:-1, crop=1080:1920:150:100"
     cmd_list = ["ffmpeg", "-i", input_file, "-filter_complex", filter_complex, "-c:v", "libx264", "-c:a", "copy", "-f", "mp4", output_file, "-y"]
+    print(' '.join(cmd_list))
     res = execute_command(cmd_list)
     return res
 
@@ -70,7 +74,7 @@ def sharpen_contrast_zoom(input_file, output_file):
     """
     filter_complex = "unsharp=5:5:2, eq=contrast=1.2:brightness=0.1, scale=1180:-1, crop=1080:1920:30:10"
     cmd_list = ["ffmpeg", "-i", input_file, "-filter_complex", filter_complex, "-c:v", "libx264", "-c:a", "copy", "-f", "mp4", output_file, "-y"]
-
+    print(' '.join(cmd_list))
     res = execute_command(cmd_list)
     return res
 
@@ -85,6 +89,7 @@ def get_cover(input_file, cover_file):
     """
     vf = r"select=eq(pict_type\,I)"
     cmd_list = ["ffmpeg", "-i", input_file, "-vf", vf, "-vframes", "1", "-vsync", "vfr", "-qscale:v", "2", "-f", "image2", cover_file, "-y"]
+    print(' '.join(cmd_list))
     res = execute_command(cmd_list)
     return res
 

@@ -5,6 +5,7 @@ import shutil
 import time
 import datetime
 import subprocess
+import cv2
 
 import cv2
 import numpy as np
@@ -69,6 +70,14 @@ def get_chrom_driver():
               """
     })
     return driver
+
+
+# 获取视频分辨率（宽，高）
+def get_video_resolution(file_path):
+    video = cv2.VideoCapture(file_path)
+    width = video.get(cv2.CAP_PROP_FRAME_WIDTH)
+    height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    return width, height
 
 
 # 获取当前时间戳的字符串

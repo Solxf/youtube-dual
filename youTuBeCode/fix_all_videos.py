@@ -25,8 +25,12 @@ if valid_file_list:
         print("{}对应的音频文件为:{}".format(file, mp4_file))
         print("{}对应的信息文件为:{}".format(file, json_file))
         # fix该文件
-        fv = FixVideo(webm_file, mp4_file, json_file)
-        res = fv.output_video()
+        try:
+            fv = FixVideo(webm_file, mp4_file, json_file)
+            res = fv.output_video()
+        except Exception:
+            print("{}对应的文件处理失败，跳过！".format(file))
+            continue
         # 将成功处理后的原始文件移动到备份目录
         if res:
             ut.move(webm_file, os.path.join(download_bak_path, os.path.basename(webm_file)))
