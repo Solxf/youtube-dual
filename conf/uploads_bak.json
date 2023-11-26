@@ -44,21 +44,6 @@
       ],
       "category":"音乐",
       "language":"english"
-    },
-    {
-      "channel_url":"https://www.youtube.com/channel/UCuOjFdUTw4wyWqMkUOHREzA",
-      "channel_name":"国外音乐",
-      "videos":[
-        {
-          "id":"UerHuQYpe8E",
-          "url":"https://www.youtube.com/watch?v=UerHuQYpe8E",
-          "name":"Sweet Relief (Behind The Scenes)",
-          "publish_date":"2023-11-10 00:00:00",
-          "published":[ ]
-        }
-      ],
-      "category":"音乐",
-      "language":"english"
     }
   ]
 }
