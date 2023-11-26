@@ -98,9 +98,9 @@ class FixVideo:
 
 
 if __name__ == '__main__':
-    webm_file = r'D:\youtube_download\20231119\1700399882550.webm'
-    mp4_file = r'D:\youtube_download\20231119\1700399882550.mp4'
-    json_file = r'D:\youtube_download\20231119\1700399882550.json'
-    fv = FixVideo(webm_file, mp4_file, json_file, model="tiny")
+    webm_file = r'D:\youtube_download\20231126\1700983912269.webm'
+    mp4_file = r'D:\youtube_download\20231126\1700983912269.mp4'
+    json_file = r'D:\youtube_download\20231126\1700983912269.json'
+    fv = FixVideo(webm_file, mp4_file, json_file, model="medium")
     fv.output_video()
 
